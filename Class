@@ -1,0 +1,29 @@
+public class OppNameController {
+    
+   public static void AutoOpp(List <Opportunity> newOppList){
+       
+       SET<Id> dfg = new Set<Id>();
+       for ( Opportunity opp : newOppList ){
+           
+           dfg.add(opp.AccountId);
+       }
+              
+     Map<ID, Account> Name = new Map<ID, Account>([SELECT Id, Name, CountOpp__c FROM Account WHERE Id IN : dfg]);
+       
+        String newNameOpp ;
+    
+        system.debug('MAP: ' + Name);
+
+    
+        for (Opportunity newOpp : newOppList)
+        {
+            newNameOpp = Name.get(newOpp.AccountId).Name +' ' +(Name.get(newOpp.AccountId).CountOpp__c +1);
+            newOpp.Name = newNameOpp;
+            
+            system.debug('newOpp: ' + newOpp.accountId); 
+            
+
+        }
+ 
+   }
+}
