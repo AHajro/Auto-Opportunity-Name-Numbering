@@ -1,0 +1,5 @@
+trigger OppName on Opportunity (before insert) {
+    
+    OppNameController.AutoOpp(trigger.new);
+
+}
